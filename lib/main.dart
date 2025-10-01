@@ -10,6 +10,7 @@ import 'package:class_demo/utils/code_page_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
 typedef RouteMeta = ({
@@ -135,6 +136,10 @@ final List<RouteMeta> meta = [
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Update URL strategy
+  usePathUrlStrategy();
+
   // Setup syntax highlighting
   await Highlighter.initialize(["dart"]);
   final HighlighterTheme lightTheme = await HighlighterTheme.loadFromAssets([
