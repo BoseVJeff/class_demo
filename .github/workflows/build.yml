@@ -1,0 +1,23 @@
+name: Build Pages Deployment
+
+on:
+    - workflow_dispatch
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Flutter Setup
+              uses: subosito/flutter-action@v2
+              with: 
+                channel: stable
+                flutter-version: 3.35.5
+            - name: Build
+              run: flutter build web --csp --no-web-resources-cdn --wasm --base-href=/class_demo/
+            - name: Deploy
+              uses: actions/upload-pages-artifact@v3
+              with:
+                path: build/web/
+              
