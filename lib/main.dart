@@ -230,7 +230,6 @@ class MyHomePage extends StatelessWidget {
     var renderList = meta.sublist(1).where((r) => !r.hidden).toList();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
         actions: [
           IconButton(
