@@ -16,8 +16,10 @@ jobs:
                 flutter-version: 3.35.5
             - name: Build
               run: flutter build web --csp --no-web-resources-cdn --wasm --base-href=/class_demo/
-            - name: Deploy
+            - name: Upload
               uses: actions/upload-pages-artifact@v3
               with:
                 path: build/web/
+            - name: Deploy
+              uses: actions/deploy-pages@v4
               
