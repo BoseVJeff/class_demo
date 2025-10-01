@@ -67,31 +67,37 @@ class _CodePageTemplateState extends State<CodePageTemplate> {
       ),
       body: ConstrainedBox(
         constraints: BoxConstraints.expand(),
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(8),
-          scrollDirection: Axis.vertical,
-          child: FutureBuilder(
-            future: code,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  return CircularProgressIndicator(color: Colors.red);
-                case ConnectionState.waiting:
-                  return CircularProgressIndicator(color: Colors.green);
-                case ConnectionState.active:
-                  return CircularProgressIndicator(color: Colors.blue);
-                case ConnectionState.done:
-                  if (snapshot.hasError) {
-                    print(snapshot.error);
-                    return Text("Error loading code!");
-                  } else {
-                    return RichText(
+        child: FutureBuilder(
+          future: code,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                return Center(
+                  child: CircularProgressIndicator(color: Colors.red),
+                );
+              case ConnectionState.waiting:
+                return Center(
+                  child: CircularProgressIndicator(color: Colors.green),
+                );
+              case ConnectionState.active:
+                return Center(
+                  child: CircularProgressIndicator(color: Colors.blue),
+                );
+              case ConnectionState.done:
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return Text("Error loading code!");
+                } else {
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.all(8),
+                    scrollDirection: Axis.vertical,
+                    child: RichText(
                       text: highlighter.highlight(snapshot.data!),
-                    );
-                  }
-              }
-            },
-          ),
+                    ),
+                  );
+                }
+            }
+          },
         ),
       ),
     );
