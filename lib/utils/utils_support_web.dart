@@ -1,0 +1,1 @@
+final bool isVideoPlayerSupported = true;
