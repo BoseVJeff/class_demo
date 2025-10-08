@@ -273,7 +273,7 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints.tightFor(width: 180),
+          constraints: BoxConstraints.tightFor(width: 200),
           child: Column(
             spacing: 4,
             mainAxisAlignment: MainAxisAlignment.center,
