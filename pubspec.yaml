@@ -78,6 +78,8 @@ flutter:
     # Font Licenses
     - fonts/inter/LICENSE.txt
     - fonts/jetbrains_mono/OFL.txt
+    # Sample text file
+    - assets/hello_world.txt
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
