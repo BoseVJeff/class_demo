@@ -4,6 +4,7 @@ import 'package:class_demo/pages/images_page.dart';
 import 'package:class_demo/pages/navigation_page.dart';
 import 'package:class_demo/pages/navigation_page_2.dart';
 import 'package:class_demo/pages/read_text_page.dart';
+import 'package:class_demo/pages/shared_preferences_page.dart';
 import 'package:class_demo/pages/text_input_page.dart';
 import 'package:class_demo/pages/video_page.dart';
 import 'package:class_demo/utils/app_globals.dart';
@@ -147,6 +148,21 @@ final List<RouteMeta> meta = [
     widgetBuilder: (_) => const CodePageTemplate(
       title: Text("Read Text Code"),
       page: "lib/pages/read_text_page.dart",
+    ),
+    hidden: true,
+  ),
+  (
+    route: "/sharedprefs",
+    name: "Shared Preferences",
+    widgetBuilder: (_) => const SharedPreferencesPage(),
+    hidden: false,
+  ),
+  (
+    route: "/sharedprefs/code",
+    name: "Shared Preferences Code",
+    widgetBuilder: (_) => const CodePageTemplate(
+      title: Text("Shared Preferences Code"),
+      page: "lib/pages/shared_preferences_page.dart",
     ),
     hidden: true,
   ),
