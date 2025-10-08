@@ -13,8 +13,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:class_demo/utils/url_strategy_dummy.dart'
-    if (dart.library.html) 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart'
+    if (dart.library.io) 'package:class_demo/utils/url_strategy_dummy.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
 typedef RouteMeta = ({
