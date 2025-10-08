@@ -1,6 +1,7 @@
 import 'package:class_demo/pages/audio_page.dart';
 import 'package:class_demo/pages/hello_world_page.dart';
 import 'package:class_demo/pages/images_page.dart';
+import 'package:class_demo/pages/json_page.dart';
 import 'package:class_demo/pages/navigation_page.dart';
 import 'package:class_demo/pages/navigation_page_2.dart';
 import 'package:class_demo/pages/read_text_page.dart';
@@ -163,6 +164,21 @@ final List<RouteMeta> meta = [
     widgetBuilder: (_) => const CodePageTemplate(
       title: Text("Shared Preferences Code"),
       page: "lib/pages/shared_preferences_page.dart",
+    ),
+    hidden: true,
+  ),
+  (
+    route: "/jsonparsing",
+    name: "JSON Parsing",
+    widgetBuilder: (_) => const JsonPage(),
+    hidden: false,
+  ),
+  (
+    route: "/jsonparsing/code",
+    name: "JSON Parsing Code",
+    widgetBuilder: (_) => const CodePageTemplate(
+      title: Text("JSON Parsing Code"),
+      page: "lib/pages/json_page.dart",
     ),
     hidden: true,
   ),
