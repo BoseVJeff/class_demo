@@ -10,7 +10,6 @@ import 'package:class_demo/utils/code_page_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 // import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:class_demo/utils/url_strategy_dummy.dart'
     if (dart.library.html) 'package:flutter_web_plugins/flutter_web_plugins.dart';
