@@ -1,3 +1,4 @@
+import 'package:class_demo/pages/api_page.dart';
 import 'package:class_demo/pages/audio_page.dart';
 import 'package:class_demo/pages/hello_world_page.dart';
 import 'package:class_demo/pages/images_page.dart';
@@ -179,6 +180,21 @@ final List<RouteMeta> meta = [
     widgetBuilder: (_) => const CodePageTemplate(
       title: Text("JSON Parsing Code"),
       page: "lib/pages/json_page.dart",
+    ),
+    hidden: true,
+  ),
+  (
+    route: "/apiparsing",
+    name: "API Parsing",
+    widgetBuilder: (_) => const ApiPage(),
+    hidden: false,
+  ),
+  (
+    route: "/apiparsing/code",
+    name: "API Parsing Code",
+    widgetBuilder: (_) => const CodePageTemplate(
+      title: Text("API Parsing Code"),
+      page: "lib/pages/api_page.dart",
     ),
     hidden: true,
   ),
