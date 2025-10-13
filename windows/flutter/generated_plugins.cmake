@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_windows
   irondash_engine_context
+  sqlite3_flutter_libs
   super_native_extensions
 )
 

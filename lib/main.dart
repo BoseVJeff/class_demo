@@ -7,6 +7,7 @@ import 'package:class_demo/pages/navigation_page.dart';
 import 'package:class_demo/pages/navigation_page_2.dart';
 import 'package:class_demo/pages/read_text_page.dart';
 import 'package:class_demo/pages/shared_preferences_page.dart';
+import 'package:class_demo/pages/sqlite_page.dart';
 import 'package:class_demo/pages/text_input_page.dart';
 import 'package:class_demo/pages/video_page.dart';
 import 'package:class_demo/utils/app_globals.dart';
@@ -195,6 +196,21 @@ final List<RouteMeta> meta = [
     widgetBuilder: (_) => const CodePageTemplate(
       title: Text("API Parsing Code"),
       page: "lib/pages/api_page.dart",
+    ),
+    hidden: true,
+  ),
+  (
+    route: "/sqlite",
+    name: "SQLite",
+    widgetBuilder: (_) => const SqlitePage(),
+    hidden: false,
+  ),
+  (
+    route: "/sqlite/code",
+    name: "API Parsing Code",
+    widgetBuilder: (_) => const CodePageTemplate(
+      title: Text("SQLite Code"),
+      page: "lib/pages/sqlite_page.dart",
     ),
     hidden: true,
   ),
