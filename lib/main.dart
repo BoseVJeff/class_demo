@@ -203,7 +203,7 @@ final List<RouteMeta> meta = [
     route: "/sqlite",
     name: "SQLite",
     widgetBuilder: (_) => const SqlitePage(),
-    hidden: false,
+    hidden: !kDebugMode,
   ),
   (
     route: "/sqlite/code",
