@@ -1,3 +1,4 @@
+import 'package:cross_file/cross_file.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -26,13 +27,61 @@ class SqlitePage extends StatelessWidget {
           ),
         ],
       ),
-      body: const SqliteExplore(),
+      body: const SqliteLoader(),
+    );
+  }
+}
+
+class SqliteLoader extends StatefulWidget {
+  const SqliteLoader({super.key});
+
+  @override
+  State<SqliteLoader> createState() => _SqliteLoaderState();
+}
+
+class _SqliteLoaderState extends State<SqliteLoader> {
+  late Future<CommonSqlite3> sqliteLoader;
+
+  @override
+  void initState() {
+    super.initState();
+    sqliteLoader = loadSqlite();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<CommonSqlite3>(
+      future: sqliteLoader,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                Text("Loading SQLite3 binary..."),
+              ],
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            print(snapshot.stackTrace!);
+            return Center(child: Text(snapshot.error.toString()));
+          } else if (!snapshot.hasData) {
+            return Center(child: Text("No Data!"));
+          } else {
+            return SqliteExplore(sqlite3: snapshot.data!);
+          }
+        }
+      },
     );
   }
 }
 
 class SqliteExplore extends StatefulWidget {
-  const SqliteExplore({super.key});
+  final CommonSqlite3 sqlite3;
+  const SqliteExplore({super.key, required this.sqlite3});
 
   @override
   State<SqliteExplore> createState() => _SqliteExploreState();
@@ -112,15 +161,15 @@ class _SqliteExploreState extends State<SqliteExplore> {
           onPressed: loadingDatabase
               ? null
               : () async {
+                  setState(() {
+                    loadingDatabase = true;
+                  });
                   FilePickerResult? result = await FilePicker.platform
                       .pickFiles();
                   if (result != null) {
-                    String? file = result.files.first.path;
+                    XFile? file = result.files.firstOrNull?.xFile;
                     if (file != null) {
-                      setState(() {
-                        loadingDatabase = true;
-                      });
-                      loadDatabase(result.files.first.xFile).then((value) {
+                      loadDatabase(widget.sqlite3, file).then((value) {
                         setState(() {
                           loadingDatabase = false;
                           _database = value;

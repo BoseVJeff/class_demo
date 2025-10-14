@@ -1,25 +1,23 @@
 import 'package:cross_file/cross_file.dart';
-import 'package:flutter/services.dart';
 import 'package:sqlite3/wasm.dart';
 
 Future<CommonSqlite3> loadSqlite() async {
   final sqlite = await WasmSqlite3.loadFromUrl(Uri.parse('sqlite3.wasm'));
-  final fileSystem = await IndexedDbFileSystem.open(dbName: 'my_app');
-  sqlite.registerVirtualFileSystem(fileSystem, makeDefault: true);
   return sqlite;
 }
 
-Future<CommonDatabase> loadDatabase(XFile xfile) async {
+String _name = "/database";
+final VirtualFileSystem _fileSystem = InMemoryFileSystem();
+
+Future<CommonDatabase> loadDatabase(CommonSqlite3 sqlite, XFile xfile) async {
   print("Setting up VFS...");
-  String name = "/database";
-  final sqlite = await WasmSqlite3.loadFromUrl(Uri.parse('sqlite3.wasm'));
+  // final sqlite = await WasmSqlite3.loadFromUrl(Uri.parse('sqlite3.wasm'));
   // final fileSystem = await IndexedDbFileSystem.open(dbName: name);
-  final VirtualFileSystem fileSystem = InMemoryFileSystem();
-  sqlite.registerVirtualFileSystem(fileSystem, makeDefault: true);
+  sqlite.registerVirtualFileSystem(_fileSystem, makeDefault: true);
 
   // print("Opening file...");
-  final openResult = fileSystem.xOpen(
-    Sqlite3Filename(name),
+  final openResult = _fileSystem.xOpen(
+    Sqlite3Filename(_name),
     SqlFlag.SQLITE_OPEN_CREATE | SqlFlag.SQLITE_OPEN_READWRITE,
   );
   // print("Writing data to file...");
@@ -32,5 +30,5 @@ Future<CommonDatabase> loadDatabase(XFile xfile) async {
   // print("Written ${openResult.file.xFileSize()} to file");
 
   print("Opening database...");
-  return sqlite.open(name, mode: OpenMode.readOnly);
+  return sqlite.open(_name, mode: OpenMode.readOnly);
 }
