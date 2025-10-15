@@ -27,7 +27,7 @@ jobs:
                 channel: stable
                 flutter-version: 3.35.5
             - name: Build
-              run: flutter build web --csp --no-web-resources-cdn --wasm --base-href=/class_demo/
+              run: flutter build web --csp --no-web-resources-cdn --no-wasm-dry-run --base-href=/class_demo/
             - name: Upload
               uses: actions/upload-pages-artifact@v3
               with:
