@@ -7,12 +7,13 @@ Future<CommonSqlite3> loadSqlite() async {
 }
 
 String _name = "/database";
-final VirtualFileSystem _fileSystem = InMemoryFileSystem();
+// final VirtualFileSystem _fileSystem = InMemoryFileSystem();
 
 Future<CommonDatabase> loadDatabase(CommonSqlite3 sqlite, XFile xfile) async {
   print("Setting up VFS...");
-  // final sqlite = await WasmSqlite3.loadFromUrl(Uri.parse('sqlite3.wasm'));
-  // final fileSystem = await IndexedDbFileSystem.open(dbName: name);
+  final VirtualFileSystem _fileSystem = await IndexedDbFileSystem.open(
+    dbName: _name,
+  );
   sqlite.registerVirtualFileSystem(_fileSystem, makeDefault: true);
 
   // print("Opening file...");
