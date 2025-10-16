@@ -12,6 +12,8 @@
 # Resuing `debian:stable` here as it is also used as the base of the main image
 FROM debian:latest AS flutter_setup
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update -y
 RUN apt-get install -y xz-utils
 # Setting up checksum here to allow Docker to cache this step
@@ -33,6 +35,7 @@ FROM debian:latest
 
 # Setup
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
 # Flutter base dependencies
 RUN apt-get install -y clang cmake git ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
