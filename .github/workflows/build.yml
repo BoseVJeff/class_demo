@@ -1,8 +1,8 @@
 name: Build Pages Deployment
 
 on:
-    - workflow_dispatch
-    - push
+  - workflow_dispatch
+  - push
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -17,22 +17,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-            - name: Flutter Setup
-              uses: subosito/flutter-action@v2
-              with: 
-                channel: stable
-                flutter-version: 3.35.5
-            - name: Build
-              run: flutter build web --csp --no-web-resources-cdn --no-wasm-dry-run --base-href=/class_demo/
-            - name: Upload
-              uses: actions/upload-pages-artifact@v3
-              with:
-                path: build/web/
-            - name: Deploy
-              uses: actions/deploy-pages@v4
-              
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Flutter Setup
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.35.5
+      - name: Build
+        run: flutter build web --csp --no-web-resources-cdn --no-wasm-dry-run --base-href=/class_demo/
+      - name: Upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web/
+      - name: Deploy
+        uses: actions/deploy-pages@v4
