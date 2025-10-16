@@ -1,6 +1,5 @@
-import 'package:cross_file/cross_file.dart';
 import 'package:equatable/equatable.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Row;
 import 'package:flutter/services.dart';
@@ -164,18 +163,14 @@ class _SqliteExploreState extends State<SqliteExplore> {
                   setState(() {
                     loadingDatabase = true;
                   });
-                  FilePickerResult? result = await FilePicker.platform
-                      .pickFiles();
-                  if (result != null) {
-                    XFile? file = result.files.firstOrNull?.xFile;
-                    if (file != null) {
-                      loadDatabase(widget.sqlite3, file).then((value) {
-                        setState(() {
-                          loadingDatabase = false;
-                          _database = value;
-                        });
+                  final XFile? file = await openFile();
+                  if (file != null) {
+                    loadDatabase(widget.sqlite3, file).then((value) {
+                      setState(() {
+                        loadingDatabase = false;
+                        _database = value;
                       });
-                    }
+                    });
                   }
                 },
           label: Text("Choose file"),
